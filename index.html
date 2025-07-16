@@ -1,0 +1,1226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ineko Smile - Turning Compassion into Change</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,500&display=swap">
+    <style>
+        :root {
+            --primary: #6EC3F7;
+            --secondary: #FF7A6B;
+            --accent: #FFD166;
+            --cream: #FFF9F0;
+            --charcoal: #2A2A2A;
+            --soft-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --whatsapp-green: #25D366;
+            --whatsapp-dark: #128C7E;
+            --glow-primary: 0 0 15px rgba(110, 195, 247, 0.6);
+            --glow-secondary: 0 0 15px rgba(255, 122, 107, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            background-color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        .italic-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--soft-shadow);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 1rem 5%;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .logo img {
+            height: 40px;
+            transition: all 0.3s;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            transition: all 0.3s;
+        }
+
+        .logo-text span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+
+        .hamburger span:nth-child(1) { top: 0px; }
+        .hamburger span:nth-child(2), .hamburger span:nth-child(3) { top: 10px; }
+        .hamburger span:nth-child(4) { top: 20px; }
+
+        .hamburger.open span:nth-child(1) {
+            top: 10px;
+            width: 0%;
+            left: 50%;
+        }
+
+        .hamburger.open span:nth-child(2) { transform: rotate(45deg); }
+        .hamburger.open span:nth-child(3) { transform: rotate(-45deg); }
+        .hamburger.open span:nth-child(4) {
+            top: 10px;
+            width: 0%;
+            left: 50%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease-out;
+            transform: translateY(20px);
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.5s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 0.8s forwards;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 122, 107, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 122, 107, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        /* Impact Counter */
+        .impact-counter {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 3rem auto 0;
+            box-shadow: var(--soft-shadow);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out 1s forwards;
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .counter-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .counter-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Problem Section */
+        .problem-section {
+            padding: 6rem 5%;
+            background-color: var(--cream);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 5vw, 2.5rem);
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .problem-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Solution Section */
+        .solution-section {
+            padding: 6rem 5%;
+            background: linear-gradient(to bottom, var(--cream) 0%, white 100%);
+        }
+
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .process-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 0 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        /* Donation Section */
+        .donation-section {
+            padding: 6rem 5%;
+            background-color: var(--cream);
+            text-align: center;
+        }
+
+        .donation-options {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .donation-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            width: 280px;
+            box-shadow: var(--soft-shadow);
+            transition: all 0.3s;
+        }
+
+        .donation-amount {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .donation-impact {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .whatsapp-btn {
+            width: 100%;
+            background-color: var(--whatsapp-green);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: var(--whatsapp-dark);
+            transform: translateY(-3px);
+        }
+
+        .custom-donation {
+            margin-top: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .donation-slider {
+            width: 100%;
+            margin: 2rem 0;
+            height: 10px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .impact-preview {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Stories Section */
+        .stories-section {
+            padding: 6rem 5%;
+            background-color: white;
+        }
+
+        .story-carousel {
+            margin-top: 3rem;
+            position: relative;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .story-slide {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--soft-shadow);
+            display: none;
+        }
+
+        .story-slide.active {
+            display: block;
+        }
+
+        .story-image {
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-content {
+            padding: 2rem;
+        }
+
+        .story-quote {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .story-author {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .carousel-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        .carousel-dot.active {
+            background-color: var(--secondary);
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 6rem 5%;
+            background-color: white;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: var(--soft-shadow);
+            text-align: center;
+        }
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 5px solid var(--cream);
+        }
+
+        .team-name {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .team-social a {
+            color: var(--charcoal);
+            transition: all 0.3s;
+        }
+
+        .team-social a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--charcoal);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-logo img {
+            height: 30px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 998;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--cream);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                transition: all 0.5s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            .counter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                flex-direction: column;
+            }
+
+            .process-step {
+                margin-bottom: 3rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-spinner"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="images/logo.jpg" alt="Ineko Smile Logo">
+            <div class="logo-text">Ineko<span>Smile</span></div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#impact">Impact</a></li>
+                <li><a href="#donate">Donate</a></li>
+                <li><a href="#stories">Stories</a></li>
+                <li><a href="#team">Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="video/WhatsApp Video 2025-07-16 at 20.46.06_7b79253c.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Turning Compassion into Change</h1>
+            <p>Every $1 you donate provides 5 days of clean water for a child in need. Join us in creating smiles that last a lifetime.</p>
+            <div class="cta-buttons">
+                <a href="#donate" class="btn btn-primary">Donate Now</a>
+                <a href="#about" class="btn btn-secondary">Our Mission</a>
+            </div>
+        </div>
+        <div class="impact-counter">
+            <h3>Our Impact So Far</h3>
+            <div class="counter-grid">
+                <div class="counter-item">
+                    <div class="counter-number" id="meals-counter">0</div>
+                    <div class="counter-label">Meals Served</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" id="children-counter">0</div>
+                    <div class="counter-label">Children Educated</div>
+                </div>
+                <div class="counter-item">
+                    <div class="counter-number" id="wells-counter">0</div>
+                    <div class="counter-label">Water Wells Built</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem-section" id="about">
+        <div class="section-header">
+            <h2>The Challenges We Face</h2>
+            <p>Millions in Malawi lack access to clean water, education, and proper nutrition. These are the challenges we're tackling head-on.</p>
+        </div>
+        <div class="problem-stats">
+            <div class="stat-card">
+                <i class="fas fa-tint stat-icon"></i>
+                <div class="stat-number">40%</div>
+                <p>Lack access to safe drinking water</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-graduation-cap stat-icon"></i>
+                <div class="stat-number">50%</div>
+                <p>Children without proper education</p>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-utensils stat-icon"></i>
+                <div class="stat-number">30%</div>
+                <p>Suffer from chronic malnutrition</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section class="solution-section" id="impact">
+        <div class="section-header">
+            <h2>Our Solution</h2>
+            <p>We transform donations into tangible impact through a clear and effective process.</p>
+        </div>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h3 class="step-title">You Donate</h3>
+                <p>Choose an amount that suits you, starting from just $1.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h3 class="step-title">We Allocate</h3>
+                <p>Funds are directed to water, education, or nutrition projects.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Projects Begin</h3>
+                <p>Our team implements wells, schools, and meal programs.</p>
+            </div>
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Impact Delivered</h3>
+                <p>Communities thrive with clean water, learning, and food.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donation-section" id="donate">
+        <div class="section-header">
+            <h2>Make a Difference Today</h2>
+            <p>Your donation can change lives. Choose an amount or customize your impact.</p>
+        </div>
+        <div class="donation-options">
+            <div class="donation-card">
+                <div class="donation-amount">25</div>
+                <div class="donation-impact">Provides 125 days of clean water</div>
+                <a href="https://wa.me/+1234567890?text=I want to donate $25 to Ineko Smile" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Donate $25
+                </a>
+            </div>
+            <div class="donation-card">
+                <div class="donation-amount">50</div>
+                <div class="donation-impact">Feeds 40 kids for a week</div>
+                <a href="https://wa.me/+1234567890?text=I want to donate $50 to Ineko Smile" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Donate $50
+                </a>
+            </div>
+            <div class="donation-card">
+                <div class="donation-amount">100</div>
+                <div class="donation-impact">Equips 10 kids with school kits</div>
+                <a href="https://wa.me/+1234567890?text=I want to donate $100 to Ineko Smile" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i> Donate $100
+                </a>
+            </div>
+        </div>
+        <div class="custom-donation">
+            <h3>Custom Donation</h3>
+            <input type="range" min="5" max="1000" value="50" step="5" class="donation-slider" id="donation-range">
+            <div class="slider-labels">
+                <span>$5</span>
+                <span>$1000</span>
+            </div>
+            <div class="impact-preview" id="impact-preview">Your $50 feeds 40 kids for a week!</div>
+            <a href="https://wa.me/+1234567890?text=I want to donate $50 to Ineko Smile" class="whatsapp-btn" id="whatsapp-custom-donate">
+                <i class="fab fa-whatsapp"></i> Donate $<span id="selected-amount">50</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Stories Section -->
+    <section class="stories-section" id="stories">
+        <div class="section-header">
+            <h2>Stories of Impact</h2>
+            <p>Hear from the communities whose lives have been transformed by your support.</p>
+        </div>
+        <div class="story-carousel">
+            <div class="story-slide active">
+                <div class="story-image" style="background-image: url('images/1.jpg')"></div>
+                <div class="story-content">
+                    <p class="story-quote italic-quote">"Thanks to Ineko Smile, my children now have clean water at school."</p>
+                    <p class="story-author">- Amina, Lilongwe</p>
+                </div>
+            </div>
+            <div class="story-slide">
+                <div class="story-image" style="background-image: url('images/2.jpg')"></div>
+                <div class="story-content">
+                    <p class="story-quote italic-quote">"The school meals program gave my daughter the energy to learn."</p>
+                    <p class="story-author">- Joseph, Blantyre</p>
+                </div>
+            </div>
+            <div class="story-slide">
+                <div class="story-image" style="background-image: url('images/3.jpg')"></div>
+                <div class="story-content">
+                    <p class="story-quote italic-quote">"The new well changed our village forever."</p>
+                    <p class="story-author">- Esther, Mzuzu</p>
+                </div>
+            </div>
+            <div class="carousel-nav">
+                <div class="carousel-dot active" data-slide="0"></div>
+                <div class="carousel-dot" data-slide="1"></div>
+                <div class="carousel-dot" data-slide="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section" id="team">
+        <div class="section-header">
+            <h2>Our Dedicated Team</h2>
+            <p>Meet the passionate individuals driving Ineko Smile's mission forward.</p>
+        </div>
+        <div class="team-grid">
+            <div class="team-member">
+                <img src="images/team1.jpg" alt="Sarah Johnson" class="team-photo">
+                <h3 class="team-name">Sarah Johnson</h3>
+                <p class="team-role">Founder & CEO</p>
+                <div class="team-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="images/team2.jpg" alt="Michael Banda" class="team-photo">
+                <h3 class="team-name">Michael Banda</h3>
+                <p class="team-role">Program Director</p>
+                <div class="team-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="images/team3.jpg" alt="Grace Mwewa" class="team-photo">
+                <h3 class="team-name">Grace Mwewa</h3>
+                <p class="team-role">Community Outreach</p>
+                <div class="team-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="images/team4.jpg" alt="David Phiri" class="team-photo">
+                <h3 class="team-name">David Phiri</h3>
+                <p class="team-role">Finance Manager</p>
+                <div class="team-social">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <img src="images/logo.jpg" alt="Ineko Smile Logo">
+                    <div class="footer-logo-text">InekoSmile</div>
+                </div>
+                <p>Turning compassion into change through clean water, education, and nutrition initiatives in Malawi.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#impact">Our Impact</a></li>
+                    <li><a href="#donate">Donate</a></li>
+                    <li><a href="#stories">Success Stories</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> info@inekosmile.org</li>
+                    <li><i class="fas fa-phone"></i> +265 123 456 789</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Lilongwe, Malawi</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Ineko Smile. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Mobile Menu Toggle
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            this.classList.toggle('open');
+            document.querySelector('nav ul').classList.toggle('active');
+        });
+
+        // Smooth Scrolling for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.hamburger').classList.remove('open');
+                    document.querySelector('nav ul').classList.remove('active');
+                }
+            });
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Show/hide back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        // Counter Animation
+        function animateCounter(id, start, end, duration) {
+            const element = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.textContent = Math.floor(progress * (end - start) + start).toLocaleString();
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Initialize counters when impact section is in view
+        const impactObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                animateCounter('meals-counter', 0, 50000, 2000);
+                animateCounter('children-counter', 0, 1000, 2000);
+                animateCounter('wells-counter', 0, 50, 2000);
+                impactObserver.disconnect();
+            }
+        }, { threshold: 0.5 });
+
+        impactObserver.observe(document.querySelector('.impact-counter'));
+
+        // Donation Slider
+        const donationRange = document.getElementById('donation-range');
+        const impactPreview = document.getElementById('impact-preview');
+        const customDonateBtn = document.getElementById('whatsapp-custom-donate');
+        const selectedAmount = document.getElementById('selected-amount');
+
+        donationRange.addEventListener('input', function() {
+            const value = this.value;
+            selectedAmount.textContent = value;
+            customDonateBtn.href = `https://wa.me/+1234567890?text=I want to donate $${value} to Ineko Smile`;
+            
+            if (value >= 100) {
+                impactPreview.textContent = `Your $${value} equips ${Math.floor(value / 10)} kids with school kits!`;
+            } else if (value >= 50) {
+                impactPreview.textContent = `Your $${value} feeds ${Math.floor(value * 0.8)} kids for a week!`;
+            } else {
+                impactPreview.textContent = `Your $${value} provides ${value * 5} days of clean water!`;
+            }
+        });
+
+        // Story Carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.story-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            currentSlide = index;
+        }
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showSlide(index));
+        });
+
+        // Auto-advance carousel
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }, 5000);
+    </script>
+</body>
+</html>
